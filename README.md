@@ -1,4 +1,4 @@
-# IDEA9103_major_project nice try1
+# IDEA9103_major_project nice try2
 
 let song;
 let fft;
