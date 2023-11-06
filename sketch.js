@@ -19,10 +19,10 @@ function setup() {
       [239, 86, 47],   // Red color
       [242, 234, 193], // Light color
     ];
-    mainColor = [249, 213, 49];
+    mainColor = [249, 213, 49];//Yellow color
     
     fft = new p5.FFT();
-    // Add the song (sample) into the FFT's input
+    
     song.connect(fft);
     
     
@@ -50,19 +50,19 @@ function mouseClicked() {
 
   if (clickCount === 0) {
     song.stop();
-    noLoop(); // Stop drawing loop if you want to stop animations
+    noLoop(); 
   } else if (clickCount % 2 === 0) {
     song.pause();
-    noLoop(); // Stop drawing loop if you want to pause animations
+    noLoop(); 
   } else {
     song.play();
-    loop(); // Start drawing loop if you want to resume animations
+    loop(); 
   }
 }
 
 function draw() {
 
-  // Give the user a hint on how to interact with the sketch
+  // Give the audience a hint on how to interact with the sketch
   if (getAudioContext().state !== 'running') {
     background(43, 103, 175);
     noStroke();
@@ -71,7 +71,7 @@ function draw() {
     textSize(16);
     text('Click to Play or Pause', width/2, height/2 - 50);
 
-    fill(249, 213, 49);
+    fill(249, 213, 49);//draw a triangle as 'play' button
     beginShape();
     vertex(width / 2 - 10, height / 2 - 20);
     vertex(width / 2 - 10, height / 2 + 20);
@@ -83,31 +83,31 @@ function draw() {
 
   let spectrum = fft.analyze();
 
-  background(backgroundColor); // Set the background color.
-  translate(-width / 2 - unitHeight / 2, -height / 2 - unitHeight / 2); // Center the composition.
+  background(backgroundColor); // Set the background color
+  translate(-width / 2 - unitHeight / 2, -height / 2 - unitHeight / 2); // Center the composition
   
   for (let recta of rectanglesList) {
-    recta.display(); // Display each rectangle.
+    recta.display(); // Display each rectangle
   }
 }
 
-// This function creates the overall composition of rectangles.
+//creates the overall composition of rectangles
 function createComposition() {
-  // Attempt to create up to 2000 rectangles.
+  // Attempt to create up to 2000 rectangles
   for (let i = 0; i < 2000; i++) {
-    let newRectangle = generateRectangle(); // Generate a new rectangle.
-    let canAdd = true; // Check if the rectangle can be added.
+    let newRectangle = generateRectangle(); // Generate a new rectangle
+    let canAdd = true; // Check if the rectangle can be added
     
-    // Check for intersections with existing rectangles.
+    // Check for intersections with existing rectangles
     for (let rectangle of rectanglesList) {
       rectangle.display();
       if (rectangle.intersects(newRectangle)) {
-        canAdd = false; // Set flag to false if there is an intersection.
+        canAdd = false; // Set flag to false if there is an intersection
         break;
       }
     }
     if (canAdd) {
-      rectanglesList.push(newRectangle); // Add the new rectangle if there is no intersection.
+      rectanglesList.push(newRectangle); // Add the new rectangle if there is no intersection
     }
   }
 
@@ -116,7 +116,7 @@ function createComposition() {
     for (let j = spacingMargin; j < 32 - spacingMargin; j++) {
       let newRectangle = new RectangularBlock(i * unitWidth, j * unitWidth, unitWidth, unitWidth, null);
       let canAdd = true;
-      // Check for intersections with existing rectangles.
+      // Check for intersections with existing rectangles
       for (let rectangle of rectanglesList) {
         if (rectangle.intersects(newRectangle)) {
           canAdd = false;
@@ -124,7 +124,7 @@ function createComposition() {
         }
       }
       if (canAdd) {
-        rectanglesList.push(newRectangle); // Add the new rectangle if there is no intersection.
+        rectanglesList.push(newRectangle); // Add the new rectangle if there is no intersection
       }
     }
   }
@@ -134,25 +134,25 @@ function createComposition() {
   let colorsCopy = colorPalette.slice(); // Copy the palette
   let index = 0;
   let remainingColors = colorsCopy.slice(); // Array to track remaining colors.
-  // Loop until there are no colors left to assign.
+  // Loop until there are no colors left to assign
   while (remainingColors.length > 0) {
     if (rectanglesList[index].width > unitWidth && rectanglesList[index].height > unitWidth && (rectanglesList[index].width + rectanglesList[index].height) < 7 * unitWidth) {
-      rectanglesList[index].insideColor = remainingColors.pop(); // Assign a color.
+      rectanglesList[index].insideColor = remainingColors.pop(); // Assign a color
     }
     index++;
-    if (index >= rectanglesList.length) break; // Stop if all rectangles are processed.
+    if (index >= rectanglesList.length) break; // Stop if all rectangles are processed
     
   }
 }
 
-// Function to generate a new rectangle with certain constraints.
+// Function to generate a new rectangle with certain constraints
 function generateRectangle() {
   let widthInUnits, heightInUnits;
   let attempts = 0;
   while (attempts < 100) {
     widthInUnits = randomInteger(4, 15) / 2;
     heightInUnits = randomInteger(4, 15) / 2;
-    // Make sure the rectangle does not meet certain conditions that are not allowed.
+    // Make sure the rectangle does not meet certain conditions that are not allowed
     if (!((widthInUnits == 2 && heightInUnits == 2) || (widthInUnits >= 4 && heightInUnits >= 4))) {
       let x0 = randomInteger(spacingMargin, 32 - spacingMargin - widthInUnits + 1) * unitWidth;
       let y0 = randomInteger(spacingMargin, 32 - spacingMargin - heightInUnits + 1) * unitWidth;
@@ -177,7 +177,7 @@ function generateRectangle() {
   return null;
 }
 
-// Class definition for RectangularBlock.
+// Class definition for RectangularBlock
 class RectangularBlock {
   constructor(x0, y0, width, height, insideColor) {
     this.x0 = x0;
@@ -193,7 +193,7 @@ class RectangularBlock {
     this.x0 += this.xSpeed;
     this.y0 += this.ySpeed;
   }
-  // Method to check if this rectangle intersects with another one.
+  // Method to check if this rectangle intersects with another one
   intersects(otherRect) {
     return (
       (this.x0 <= otherRect.x0 && this.x0 + this.width > otherRect.x0) ||
@@ -203,9 +203,9 @@ class RectangularBlock {
       (otherRect.y0 <= this.y0 && otherRect.y0 + otherRect.height > this.y0)
     );
   }
-  
 
-  // Method to display the rectangle.
+
+  // Method to display the rectangle
   display() {
     if (this.insideColor) {
       fill(this.insideColor);
@@ -254,7 +254,7 @@ class RectangularBlock {
 }
 
 
-// Function to get a random color that is different from the previous color.
+// Function to get a random color that is different from the previous color
 function getRandomColor(previousColor) {
   let newColor;
   while (true) {
@@ -265,7 +265,7 @@ function getRandomColor(previousColor) {
   }
 }
 
-// Function that adjusts the canvas size when the window is resized.
+// Function that adjusts the canvas size when the window is resized
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   unitWidth = width / 16; // Recalculate unitWidth based on new canvas width
