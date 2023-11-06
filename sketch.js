@@ -5,7 +5,7 @@ let clickCount = 0;//set the clickcount, when click the sketch, the music will p
 function preload() {
 //load my music
   song = loadSound('audio/Spindash.mp3') ;
-  
+  song.loop();//loop the audio
   }
 
 function setup() {
