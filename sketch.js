@@ -27,7 +27,7 @@ function setup() {
     
     
     unitWidth = width / 16;  // Calculate the unit width based on canvas width.
-    unitHeight = unitWidth / 11; // Calculate the unit height as a quarter of the unit width.
+    unitHeight = unitWidth / 9; // Calculate the unit height as a quarter of the unit width.
     noStroke(); // Disable drawing strokes.
     createComposition(); // Call the function to create the composition.
     noLoop();
