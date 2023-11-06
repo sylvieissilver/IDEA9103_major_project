@@ -66,6 +66,12 @@ function draw() {
   if (getAudioContext().state !== 'running') {
     background(43, 103, 175);
     noStroke();
+    fill(249, 213, 49);
+    textAlign(CENTER, CENTER);
+    textSize(16);
+    text('Click to Play or Pause', width/2, height/2 - 50);
+
+    fill(249, 213, 49);
     beginShape();
     vertex(width / 2 - 10, height / 2 - 20);
     vertex(width / 2 - 10, height / 2 + 20);
