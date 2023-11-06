@@ -14,7 +14,7 @@ function setup() {
     song.connect(fft);
     
     colorPalette = [
-    [5, 5, 5],       // Dark color
+      [5, 5, 5],       // Dark color
       [43, 103, 175],  // Blue color
       [239, 86, 47],   // Red color
       [242, 234, 193], // Light color
@@ -27,7 +27,7 @@ function setup() {
     
     
     unitWidth = width / 16;  // Calculate the unit width based on canvas width.
-    unitHeight = unitWidth / 4; // Calculate the unit height as a quarter of the unit width.
+    unitHeight = unitWidth / 11; // Calculate the unit height as a quarter of the unit width.
     noStroke(); // Disable drawing strokes.
     createComposition(); // Call the function to create the composition.
     noLoop();
