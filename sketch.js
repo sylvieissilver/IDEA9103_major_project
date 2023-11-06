@@ -1,16 +1,18 @@
 let song;
 let fft;
-let clickCount = 0;
+let clickCount = 0;//set the clickcount, when click the sketch, the music will play or pause
 
 function preload() {
-
+//load my music
   song = loadSound('audio/Spindash.mp3') ;
   
   }
 
 function setup() {
+
     createCanvas(windowWidth, windowHeight);
-    fft = new p5.FFT();
+
+    fft = new p5.FFT();//set FFT
     song.connect(fft);
     
     colorPalette = [
@@ -20,12 +22,7 @@ function setup() {
       [242, 234, 193], // Light color
     ];
     mainColor = [249, 213, 49];//Yellow color
-    
-    fft = new p5.FFT();
-    
-    song.connect(fft);
-    
-    
+
     unitWidth = width / 16;  // Calculate the unit width based on canvas width.
     unitHeight = unitWidth / 9; // Calculate the unit height as a quarter of the unit width.
     noStroke(); // Disable drawing strokes.
@@ -44,7 +41,7 @@ let rectanglesList = []; // Array to store the rectangle objects.
 // Function to generate a random integer between 'a' and 'b'.
 let randomInteger = (a, b) => floor(random(a, b));
 
-
+//set mouseclicked to create interaction
 function mouseClicked() {
   clickCount++; // Increment the counter on each click
 
@@ -62,7 +59,7 @@ function mouseClicked() {
 
 function draw() {
 
-  // Give the audience a hint on how to interact with the sketch
+  // Give the audience a hint on how to interact with the sketch at the beginning
   if (getAudioContext().state !== 'running') {
     background(43, 103, 175);
     noStroke();
@@ -129,7 +126,6 @@ function createComposition() {
     }
   }
 
-  
   // choose the rectangles with color rectangles inside
   let colorsCopy = colorPalette.slice(); // Copy the palette
   let index = 0;
@@ -252,7 +248,6 @@ class RectangularBlock {
     }
   }
 }
-
 
 // Function to get a random color that is different from the previous color
 function getRandomColor(previousColor) {
